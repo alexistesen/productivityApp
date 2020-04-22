@@ -59,7 +59,7 @@ public class ArrayCategory {
 //			Special Array for Reader
 			String[] s;
 
-			br = new BufferedReader(new FileReader("Category.txt"));
+			br = new BufferedReader(new FileReader("F:\\ESTUDIO\\Codigo Global\\Proyectos_Java\\Cibertec\\7. Septimo Ciclo\\productivityApp\\Category.txt"));
 
 			while ((linea = br.readLine()) != null) {
 
@@ -82,40 +82,45 @@ public class ArrayCategory {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void saveCategorys() {
-		
+
 		try {
-			PrintWriter pw;	
+			PrintWriter pw;
 			Category reg;
 			String linea;
-			
-			pw = new PrintWriter(new FileWriter("Category.txt"));
-			
+
+			pw = new PrintWriter(new FileWriter("F:\\ESTUDIO\\Codigo Global\\Proyectos_Java\\Cibertec\\7. Septimo Ciclo\\productivityApp\\Category.txt"));
+
 			for (Category c : categoryList) {
-				linea = c.getId_category() + ";" + 
-						c.getCat_description();
-				
+				linea = c.getId_category() + ";" + c.getCat_description();
+
 				pw.println(linea);
 			}
-			
+
 //			for (int i=0; i< categoryList.size(); i++) {
 //				reg = categoryList.get(i); 
 //				linea = reg.getId_category() + ";" + 
 //						reg.getCat_description();
 //				pw.println(linea);
 //			}
-			
+
 			System.out.println(categoryList);
-			
+
 			pw.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
-	}	
+
+	}
+
+	public ArrayList<Category> getCategoryList() {
+		return categoryList;
+	}
+
+	public void setCategoryList(ArrayList<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
 
 }

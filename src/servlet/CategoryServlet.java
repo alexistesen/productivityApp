@@ -7,41 +7,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class CategoryServlet
- */
+import arrays.ArrayCategory;
+import classmains.Category;
+
 @WebServlet(name = "cat", urlPatterns = { "/cat" })
 public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	ArrayCategory list = new ArrayCategory();
 
-    /**
-     * Default constructor. 
-     */
-    public CategoryServlet() {
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		System.out.println("Entre al metodo GET");
+		
+		
+		request.setAttribute("list", list.getCategoryList());
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
+		System.out.println("Entre al metodo POST");
+		String cat_description = request.getParameter("cat_description");
+		
+		list.addCategory(new Category(list.generateIdCategory(),cat_description));
+		list.saveCategorys();
+		
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		doGet(request, response);
+		
 	}
 
 }
